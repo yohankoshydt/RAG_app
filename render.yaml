@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: sales-RAG          # Replace with your preferred service name
+    env: python               # Sets the environment to Python
+    region: oregon            # Optional: specify a region (e.g., oregon, frankfurt)
+    plan: free                # Plan type (e.g., free, standard)
+    pythonVersion: 3.11.10    # Specify the Python version to use
+    
+    buildCommand: "poetry install"  # Command to install dependencies (or use pip if needed)
+    startCommand: "python your_app.py"  # Command to start your app; replace with your entry point
+    
+    envVars:                  # Optional environment variables
+      - key: DATABASE_URL
+        value: YOUR_DATABASE_URL_HERE
+      - key: SECRET_KEY
+        value: YOUR_SECRET_KEY_HERE
