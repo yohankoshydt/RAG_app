@@ -4,7 +4,7 @@ from data import read_excel, get_content_text
 from RAG import QueryHandler
 
 # Load data from Excel
-file_path = r'D:\OneDrive - Diacto Technologies Private Limited\Desktop\Sales_Sol_Sheet.xlsx'
+file_path = r'.\Sales_Sol_Sheet.xlsx'
 df = read_excel(file_path)
 
 
