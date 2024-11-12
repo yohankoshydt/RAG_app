@@ -5,7 +5,7 @@ class Config:
     MONGO_URI = "mongodb+srv://new:VtMVDPqAtfUqkDS0@resume-data.1ueh5w9.mongodb.net/?appName=resume-data"
     DB_NAME = 'vectors'
     COLLECTION_NAME = 'test'
-    OPENAI_API_KEY = 'sk-proj-dQNleXHlKHcZPD5mhBzvT3BlbkFJS5RMhHgcP2sHeUUbcW8d'
+    OPENAI_API_KEY = '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'
     AWS_KEY = 'AKIAQO5H23OL36W7OZEF'
     AWS_SECRET_KEY = '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'
     AWS_REGION = 'us-east-1'
