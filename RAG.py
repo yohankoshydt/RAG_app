@@ -3,13 +3,14 @@ import regex as re
 import os
 
 class Config:
-    MONGO_URI = "mongodb+srv://new:VtMVDPqAtfUqkDS0@resume-data.1ueh5w9.mongodb.net/?appName=resume-data"
-    DB_NAME = 'vectors'
-    COLLECTION_NAME = 'test'
+
     OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
-    AWS_KEY = 'AKIAQO5H23OL36W7OZEF'
-    AWS_SECRET_KEY = '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'
-    AWS_REGION = 'us-east-1'
+    #MONGO_URI = "mongodb+srv://new:VtMVDPqAtfUqkDS0@resume-data.1ueh5w9.mongodb.net/?appName=resume-data"
+    #DB_NAME = 'vectors'
+    #COLLECTION_NAME = 'test'
+    #AWS_KEY = 'AKIAQO5H23OL36W7OZEF'
+    #AWS_SECRET_KEY = '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'
+    #AWS_REGION = 'us-east-1'
 
 class GenerationHandler:
     def __init__(self):
