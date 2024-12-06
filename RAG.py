@@ -3,7 +3,7 @@ import regex as re
 import os
 
 class Config:
-   
+    
     OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
     
 
@@ -111,10 +111,12 @@ class QueryHandler:
           Offer a clear call to action, suggesting a low-commitment next step, like a brief meeting to explore further. Keep it open and considerate of the recipient’s time.
 
           End with a polite thank-you and an optimistic closing.
-          Keep this sales email brief and wrap it up within 200-300 words.
+          Keep this sales email brief and wrap it up within 200-300 words.Always use a positive and confident tone. Avoid phrases that imply limitations or lack of knowledge.Frame responses with a focus on actionable insights and available solutions. Do not mention what cannot be done.
           If the subset of the portfolio in the above section is None or empty then write a generic sales email to the Recipient.
           Use this structured approach to ensure the email is personalized, relevant, and presents the sender’s company as a valuable partner for the recipient’s company in their industry.
           Encapsulate relevant words that describe the case study or dashboards and with <a> tags with href being the given link in the context.
+          Do not add any links in the email you write that are not given in the context, only add the links given in the context.
+
           ################
 
 
