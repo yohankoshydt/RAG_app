@@ -59,7 +59,7 @@ st.session_state.context['Sender_summary'] = st.text_area("Sender Summary", st.s
 
 # Button to fetch data from the database and process content
 def update_context(context, presets, query_handler, df):
-
+    summary_data = None
   # Button to fetch data from the database and process content
   try:
       # Fetch content text from URL
