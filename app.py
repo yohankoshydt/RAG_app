@@ -60,54 +60,54 @@ st.session_state.context['Sender_summary'] = st.text_area("Sender Summary", st.s
 # Button to fetch data from the database and process content
 def update_context(context, presets, query_handler, df):
     summary_data = None
-  # Button to fetch data from the database and process content
-  try:
-      # Fetch content text from URL
-      url = st.session_state.presets['Website']
-      content_text = get_content_text(url)
-      summary_data = query_handler.summarize_page(content_text)
+    # Button to fetch data from the database and process content
+    try:
+        # Fetch content text from URL
+        url = st.session_state.presets['Website']
+        content_text = get_content_text(url)
+        summary_data = query_handler.summarize_page(content_text)
 
-      # Check if parsing was successful and update session state context
-      if isinstance(summary_data, dict):
-          # Update context with Industry and Description
-          st.session_state.context.update({
-              'Rec_summary': summary_data.get('Description', 'No description available'),
-              'Industry': summary_data.get('Industry', 'No industry information available')
-          })
+        # Check if parsing was successful and update session state context
+        if isinstance(summary_data, dict):
+            # Update context with Industry and Description
+            st.session_state.context.update({
+                'Rec_summary': summary_data.get('Description', 'No description available'),
+                'Industry': summary_data.get('Industry', 'No industry information available')
+            })
 
-          # Filter DataFrame by Industry and Function
-          filtered_df = df[(df['Industry'] == context['Industry']) &
-                          (df['Function'] == presets['Recipient_Function'])]
-
-
-          # Create case_studies list
-          case_studies = {}
-          for _, row in filtered_df.iterrows():
-              if pd.notna(row['Casestudy one liners']):
-                case_studies.update({"name":row['Casestudy Title'] , "summary": row['Casestudy one liners'], "link": f'{row["Case Study Link"]}'})
-          # Create dashboards list
-          dashboards = {}
-          for _, row in filtered_df.iterrows():
-              if pd.notna(row['Dashboard Title']) or pd.notna(row['Dashboard Description']):
-                  dashboards.update({"name": row['Dashboard Title'], "summary": row['Dashboard Description'], "link": row['Dashboard Link']})
-                  
-
-          clients = filtered_df['Clients Served'].dropna().unique().tolist()
-          clients = ', '.join(clients) if clients else None
+            # Filter DataFrame by Industry and Function
+            filtered_df = df[(df['Industry'] == context['Industry']) &
+                            (df['Function'] == presets['Recipient_Function'])]
 
 
-          # Update context with fetched case studies and dashboards
-          st.session_state.context.update({
-              'case_studies': case_studies,
-              'dashboards': dashboards,
-              'clients' : clients
-          })
+            # Create case_studies list
+            case_studies = {}
+            for _, row in filtered_df.iterrows():
+                if pd.notna(row['Casestudy one liners']):
+                    case_studies.update({"name":row['Casestudy Title'] , "summary": row['Casestudy one liners'], "link": f'{row["Case Study Link"]}'})
+            # Create dashboards list
+            dashboards = {}
+            for _, row in filtered_df.iterrows():
+                if pd.notna(row['Dashboard Title']) or pd.notna(row['Dashboard Description']):
+                    dashboards.update({"name": row['Dashboard Title'], "summary": row['Dashboard Description'], "link": row['Dashboard Link']})
+                    
 
-          print("Data fetched and processed successfully")
-  except Exception as e:
-      print(f"Error: {e}")
-      print(summary_data)
-      print("Failed to fetch or parse data")
+            clients = filtered_df['Clients Served'].dropna().unique().tolist()
+            clients = ', '.join(clients) if clients else None
+
+
+            # Update context with fetched case studies and dashboards
+            st.session_state.context.update({
+                'case_studies': case_studies,
+                'dashboards': dashboards,
+                'clients' : clients
+            })
+
+            print("Data fetched and processed successfully")
+    except Exception as e:
+        print(f"Error: {e}")
+        print(summary_data)
+        print("Failed to fetch or parse data")
 
 
 
