@@ -3,7 +3,6 @@ import regex as re
 import os
 
 class Config:
-    
     OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
     
 
@@ -48,8 +47,8 @@ class QueryHandler:
       match = re.search(regex, email, re.DOTALL)
       if match:
           email_content = match.group(1)  # Extract the multiline string
-          print("Extracted Multiline String:")
-          print(email_content)
+        #   print("Extracted Multiline String:")
+        #   print(email_content)
           return email_content
       else:
           print("No match found.")
@@ -76,7 +75,7 @@ class QueryHandler:
             Context: {context}
             Your Response:'''
         response = self.generation_handler.llm_response(prompt)
-        print(response)
+        # print(response)
         return self.parse_response(response)  # Using the parse_response function
 
     def generate_email(self, presets, context, print_context=False):
@@ -111,12 +110,12 @@ class QueryHandler:
           Offer a clear call to action, suggesting a low-commitment next step, like a brief meeting to explore further. Keep it open and considerate of the recipient’s time.
 
           End with a polite thank-you and an optimistic closing.
-          Keep this sales email brief and wrap it up within 200-300 words.Always use a positive and confident tone. Avoid phrases that imply limitations or lack of knowledge.Frame responses with a focus on actionable insights and available solutions. Do not mention what cannot be done.
+          Keep this sales email brief and wrap it up within 150-200 words.Always use a positive and confident tone. Avoid phrases that imply limitations or lack of knowledge.Frame responses with a focus on actionable insights and available solutions. Do not mention what cannot be done.
           If the subset of the portfolio in the above section is None or empty then write a generic sales email to the Recipient.
           Use this structured approach to ensure the email is personalized, relevant, and presents the sender’s company as a valuable partner for the recipient’s company in their industry.
-          Encapsulate relevant words that describe the case study or dashboards and with <a> tags with href being the given link in the context.
+          Encapsulate relevant words that describe the case study or dashboards and with <a> tags with href being the given link in the context. Ensure to do this for all the links given to you.
           Do not add any links in the email you write that are not given in the context, only add the links given in the context.
-
+          Ensure proper formatting of the email with linebreaks and paragraphs wherever necessary.
           ################
 
 
@@ -127,7 +126,11 @@ class QueryHandler:
 
 
           Your Response:'''
-        print(prompt)
+        print(f'''prompt: {context['Industry']},
+              {presets['Recipient_Function']} 
+              {'Relevant Case Studies' if context['case_studies'] else None } {context['case_studies']}
+              {'Relevant Dashboards' if context['dashboards'] else None } {context['dashboards']}
+              {'Clients Served' if context['clients'] else None }  {context['clients']}''')
         response = self.generation_handler.llm_response(prompt)
 
         return self.parse_email(response)
