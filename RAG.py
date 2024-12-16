@@ -84,8 +84,8 @@ class QueryHandler:
 
         prompt = f'''
           You are a {context['Sender_Designation']} named- {context['Sender_Name']} of company- {context['Sender_Company']}
-          and you have been tasked to write a cold sales email to the {presets['Recipient_Designation']}
-          {presets['Recipient']} of {presets['Recipient_Company']} you will be given information relating to what services we ({context['Sender_Company']}) can
+          and you have been tasked to write a cold sales email to the {presets['Recipient_Designation']} of {presets['Recipient_Function']} named
+          {presets['Recipient']} working at {presets['Recipient_Company']} you will be given information relating to what services we ({context['Sender_Company']}) can
           provide them ({presets['Recipient_Company']}) in the next section named Context.
 
           #Context:
