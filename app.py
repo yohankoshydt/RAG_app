@@ -64,49 +64,49 @@ def update_context(context, presets, query_handler, df):
                     
                 })
 
-                # Filter DataFrame by Industry and Function
-                print(f'{context['Industry'], {presets['Recipient_Function']}}')
-                filtered_df = df[
-                                (df['Industry'] == context['Industry']) &
-                                (
-                                    (df['Function'] == presets['Recipient_Function']) |
-                                    (df['Function'] == 'All')
-                                )
-                            ]
-                
-                print(filtered_df.head())
+        # Filter DataFrame by Industry and Function
+        print(f'{context['Industry'], {presets['Recipient_Function']}}')
+        filtered_df = df[
+                        (df['Industry'] == context['Industry']) &
+                        (
+                            (df['Function'] == presets['Recipient_Function']) |
+                            (df['Function'] == 'All')
+                        )
+                    ]
+        
+        print(filtered_df.head())
 
-                # Create case_studies list
-                case_studies = []
-                for _, row in filtered_df.iterrows():
-                    if pd.notna(row['Casestudy one liners']):
-                        case_studies.append({
-                            "name": row['Casestudy Title'],
-                            "summary": row['Casestudy one liners'],
-                            "link": row['Case Study Link']
-                        })
-
-                # Create dashboards list
-                dashboards = []
-                for _, row in filtered_df.iterrows():
-                    if pd.notna(row['Dashboard Title']) or pd.notna(row['Dashboard Description']):
-                        dashboards.append({
-                            "name": row['Dashboard Title'],
-                            "summary": row['Dashboard Description'],
-                            "link": row['Dashboard Link']
-                        })
-
-                clients = filtered_df['Clients Served'].dropna().unique().tolist()
-                clients = ', '.join(clients) if clients else None
-
-                # Update context with fetched case studies and dashboards
-                st.session_state.context.update({
-                    'case_studies': case_studies,
-                    'dashboards': dashboards,
-                    'clients': clients
+        # Create case_studies list
+        case_studies = []
+        for _, row in filtered_df.iterrows():
+            if pd.notna(row['Casestudy one liners']):
+                case_studies.append({
+                    "name": row['Casestudy Title'],
+                    "summary": row['Casestudy one liners'],
+                    "link": row['Case Study Link']
                 })
 
-                st.success("Details updated successfully.")
+        # Create dashboards list
+        dashboards = []
+        for _, row in filtered_df.iterrows():
+            if pd.notna(row['Dashboard Title']) or pd.notna(row['Dashboard Description']):
+                dashboards.append({
+                    "name": row['Dashboard Title'],
+                    "summary": row['Dashboard Description'],
+                    "link": row['Dashboard Link']
+                })
+
+        clients = filtered_df['Clients Served'].dropna().unique().tolist()
+        clients = ', '.join(clients) if clients else None
+
+        # Update context with fetched case studies and dashboards
+        st.session_state.context.update({
+            'case_studies': case_studies,
+            'dashboards': dashboards,
+            'clients': clients
+        })
+
+        st.success("Details updated successfully.")
     except Exception as e:
         print(f"Error: {e}")
         print(summary_data)
