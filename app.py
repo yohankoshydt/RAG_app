@@ -9,6 +9,7 @@ df = read_file(file_path)
 industries = df['Industry'].unique().tolist()
 industries.append('Other')
 
+
 # Initialize QueryHandler
 query_handler = QueryHandler()
 
